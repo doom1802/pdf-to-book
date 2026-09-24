@@ -15,6 +15,8 @@ capitolo; le formule con immagine restano nella medesima posizione di lettura.
 
 La dimensione dei titoli è stimata dalle dimensioni effettive dei caratteri nel PDF, perché alcuni documenti dichiarano una dimensione font nominale di 1 e applicano una matrice di scala. Dimensioni distinte producono livelli ordinati. Le intestazioni dei listati vengono convertite in didascalie.
 
+Titoli ed elementi di lista con spazi fusi nel testo Docling vengono ricontrollati nel text layer della stessa regione PDF. Gli spazi della fonte sostituiscono quelli del parser soltanto se la sequenza dei caratteri, ignorando gli spazi e le varianti tipografiche delle virgolette, coincide. Blocchi di codice adiacenti sulla stessa pagina e separati da un piccolo intervallo verticale vengono ricostruiti da un unico rettangolo per conservare il rientro delle righe spezzate dal parser.
+
 Le note esplicitamente classificate e i piccoli elementi numerati in fondo alla pagina sono raccolti separatamente. Il riferimento nel testo viene collegato soltanto se il marcatore ha una singola occorrenza candidata nella prosa della stessa pagina. I casi ambigui rimangono visibili e vengono segnalati.
 
 I paragrafi incompleti vengono uniti solo tra pagine consecutive e senza un blocco semantico intermedio. I blocchi di codice che attraversano pagine rimangono distinti con un avviso. Una chiusura di codice separata su una stessa pagina può essere recuperata come un unico rettangolo con il blocco precedente, se immediatamente adiacente.

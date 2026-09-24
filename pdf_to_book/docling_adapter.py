@@ -55,6 +55,18 @@ class SourceGeometry:
         sizes = [box[3]-box[1] for char, box, _ in self.characters(provenance) if char.strip()]
         return statistics.median(sizes) if sizes else 0
 
+    def bounded_text(self, provenance):
+        """Read source glyphs in a parser box, preserving PDF-inferred word gaps."""
+        number = provenance['page_no']
+        self.characters(provenance)  # Populate the page/text cache.
+        page, text, _ = self.pages[number]
+        box = provenance['bbox']
+        left, right = box['l'] - .5, box['r'] + .5
+        bottom, top = box['b'] - .5, box['t'] + .5
+        if box.get('coord_origin') == 'TOPLEFT':
+            bottom, top = page.get_height() - top, page.get_height() - bottom
+        return re.sub(r'\s+', ' ', text.get_text_bounded(left, bottom, right, top)).strip()
+
     def code(self, provenance):
         chars = [(char, box) for char, box, _ in self.characters(provenance)]
         if not chars:
@@ -154,6 +166,15 @@ def resolve_asset(uri, json_path):
     raise FileNotFoundError(f'Missing image: {uri}')
 
 
+def recover_word_spacing(parser_text, source_text, *, marker=''):
+    """Use source spacing only when it contains the same characters in order."""
+    if marker and source_text.startswith(marker):
+        source_text = source_text[len(marker):].lstrip()
+    quotes = str.maketrans({'‘': "'", '’': "'", '“': '"', '”': '"'})
+    same_characters = compact(parser_text.translate(quotes)).casefold() == compact(source_text.translate(quotes)).casefold()
+    return source_text if same_characters and source_text.count(' ') > parser_text.count(' ') else parser_text
+
+
 def embedded_figure_text_refs(data):
     """Find text already painted into a picture, without hiding its caption."""
     embedded = set()
@@ -244,11 +265,10 @@ def adapt(json_path, source, title, author, language, assets_dir):
     try:
         items = []
         for item in walk(data['body']):
-            # A closing brace is sometimes emitted as a separate code block.
-            # Re-extract the union of adjacent boxes instead of inventing indentation.
+            # A continuation line can be emitted as a separate code block.
+            # Re-extract the union of nearby boxes to retain common indentation.
             previous = items[-1] if items else None
             if (previous and previous['label'] == item['label'] == 'code'
-                and re.fullmatch(r'\s*[}\])]+[;,\s]*', item.get('text',''))
                 and len(previous.get('prov',[])) == len(item.get('prov',[])) == 1):
                 a,b = previous['prov'][0],item['prov'][0]
                 if a['page_no'] == b['page_no'] and a['bbox'].get('coord_origin') == b['bbox'].get('coord_origin') == 'BOTTOMLEFT' and 0 <= a['bbox']['b']-b['bbox']['t'] <= 15:
@@ -268,6 +288,11 @@ def adapt(json_path, source, title, author, language, assets_dir):
             kind = {'text':'paragraph','section_header':'heading','picture':'figure'}.get(label,label)
             block = {'id': item['self_ref'].removeprefix('#/').replace('/','-'),
                      'type': kind, 'text': item.get('text',''), 'provenance':prov}
+            if kind in {'heading', 'list_item'} and len(prov) == 1:
+                block['text'] = recover_word_spacing(
+                    block['text'], geometry.bounded_text(prov[0]),
+                    marker=item.get('marker', '') if kind == 'list_item' else '',
+                )
             if item.get('joined_source_refs'):
                 block['joined_source_refs'] = item['joined_source_refs']
             if kind == 'code':

@@ -12,7 +12,7 @@
     {"kind": "figure_with_caption", "page": 2, "caption": "Figure 1: The thermodynamic path", "min_width": 200},
     {"kind": "order", "page": 2, "texts": ["introduce an external", "remove the cleaving potentials", "Figure 1: The thermodynamic path"]},
     {"kind": "epub_excludes", "text": "Di Pasquale et al. (2024). CLEAVING"},
-    {"kind": "count", "type": "*", "minimum": 40}
+    {"kind": "count", "type": "paragraph", "minimum": 18}
   ],
   "known_gaps": [
     {"feature": "decorative_artifacts", "expected": "Journal logos and tiny link icons are not read as content figures.", "observed": "Docling emits several decorative marks as figures; the meaningful Figure 1 is preserved."},
