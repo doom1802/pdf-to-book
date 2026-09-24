@@ -1,0 +1,31 @@
+{
+  "benchmark_version": 1,
+  "stage": "full",
+  "runs": 3,
+  "environment": {
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.12.13"
+  },
+  "quality_sha256": "614bca1f417600ebed7431e310b412dd002a692786e1ad8c41948a4f6e2f7852",
+  "seconds": {
+    "median": 9.697327,
+    "minimum": 8.865382,
+    "maximum": 33.933785,
+    "values": [
+      33.933785,
+      9.697327,
+      8.865382
+    ]
+  },
+  "peak_rss_mb": {
+    "median": 2892.48,
+    "maximum": 2902.48,
+    "values": [
+      2902.48,
+      2892.23,
+      2892.48
+    ]
+  },
+  "failures": []
+}

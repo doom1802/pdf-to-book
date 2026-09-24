@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Golden Set Reviewer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <header class="brand">
+        <div class="brand-mark">PB</div>
+        <div><strong>Golden Reviewer</strong><span>PDF to Book</span></div>
+      </header>
+      <div class="progress-card">
+        <span>Avanzamento</span>
+        <strong id="progressText">-</strong>
+        <div class="progress-track"><i id="progressBar"></i></div>
+      </div>
+      <nav id="pageList" class="page-list" aria-label="Pagine del golden set"></nav>
+    </aside>
+
+    <main class="workspace">
+      <header class="toolbar">
+        <div>
+          <div class="eyebrow" id="bookLabel">Golden set</div>
+          <h1 id="pageTitle">Caricamento...</h1>
+        </div>
+        <div class="toolbar-actions">
+          <label class="parser-control">Parser
+            <select id="parserSelect"></select>
+          </label>
+          <button id="saveDraft" class="button secondary">Salva bozza</button>
+          <button id="markReviewed" class="button primary">Segna revisionata</button>
+        </div>
+      </header>
+
+      <section id="metrics" class="metrics" aria-label="Metriche parser"></section>
+
+      <section class="review-grid">
+        <article class="panel source-panel">
+          <header class="panel-header">
+            <div><span class="panel-kicker">Sorgente</span><h2>Pagina originale</h2></div>
+            <label class="zoom-control">Zoom <input id="zoom" type="range" min="55" max="150" value="82"></label>
+          </header>
+          <div class="source-scroll"><img id="sourceImage" alt="Pagina PDF originale"></div>
+        </article>
+
+        <article class="panel golden-panel">
+          <header class="panel-header sticky">
+            <div><span class="panel-kicker">Verità di riferimento</span><h2>Golden modificabile</h2></div>
+            <button id="addBlock" class="icon-button" title="Aggiungi blocco">＋</button>
+          </header>
+          <div class="annotation-meta">
+            <label>Note di revisione<textarea id="annotationNotes" rows="2"></textarea></label>
+          </div>
+          <div id="goldBlocks" class="blocks"></div>
+        </article>
+
+        <article class="panel parser-panel">
+          <header class="panel-header sticky">
+            <div><span class="panel-kicker">Risultato automatico</span><h2 id="parserTitle">Parser</h2></div>
+          </header>
+          <div id="parserEmpty" class="empty-state" hidden>Nessuna predizione disponibile per questa pagina.</div>
+          <div id="parserBlocks" class="blocks readonly"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

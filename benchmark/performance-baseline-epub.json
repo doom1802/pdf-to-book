@@ -1,0 +1,39 @@
+{
+  "benchmark_version": 1,
+  "stage": "epub",
+  "runs": 7,
+  "environment": {
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.12.13"
+  },
+  "quality_sha256": "614bca1f417600ebed7431e310b412dd002a692786e1ad8c41948a4f6e2f7852",
+  "seconds": {
+    "median": 0.542136,
+    "minimum": 0.526941,
+    "maximum": 0.605635,
+    "values": [
+      0.571836,
+      0.605635,
+      0.526941,
+      0.54938,
+      0.538795,
+      0.542136,
+      0.537383
+    ]
+  },
+  "peak_rss_mb": {
+    "median": 73.52,
+    "maximum": 74.31,
+    "values": [
+      73.64,
+      74.31,
+      73.11,
+      73.38,
+      73.58,
+      73.38,
+      73.52
+    ]
+  },
+  "failures": []
+}

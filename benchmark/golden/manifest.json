@@ -1,0 +1,116 @@
+{
+  "version": "0.1",
+  "selection_date": "2026-09-18",
+  "pages": [
+    {
+      "id": "clean-code-page-035",
+      "source": "samples/clean-code-robert-c-martin.pdf",
+      "page_number_pdf": 35,
+      "features": [
+        "heading",
+        "paragraph",
+        "figure",
+        "caption",
+        "running_header"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "clean-code-page-050",
+      "source": "samples/clean-code-robert-c-martin.pdf",
+      "page_number_pdf": 50,
+      "features": [
+        "heading",
+        "paragraph",
+        "code",
+        "footnote"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "clean-code-page-100",
+      "source": "samples/clean-code-robert-c-martin.pdf",
+      "page_number_pdf": 100,
+      "features": [
+        "heading",
+        "paragraph",
+        "code",
+        "running_header"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "ddia-page-025",
+      "source": "samples/designing-data-intensive-applications-martin-kleppmann.pdf",
+      "page_number_pdf": 25,
+      "features": [
+        "chapter_title",
+        "epigraph",
+        "paragraph",
+        "list"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "ddia-page-035",
+      "source": "samples/designing-data-intensive-applications-martin-kleppmann.pdf",
+      "page_number_pdf": 35,
+      "features": [
+        "heading",
+        "paragraph",
+        "list",
+        "footnote",
+        "running_footer"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "ddia-page-075",
+      "source": "samples/designing-data-intensive-applications-martin-kleppmann.pdf",
+      "page_number_pdf": 75,
+      "features": [
+        "heading",
+        "paragraph",
+        "code",
+        "numbered_list",
+        "running_footer"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "linguaggio-c-page-007",
+      "source": "samples/linguaggio-c-kernighan-ritchie.pdf",
+      "page_number_pdf": 7,
+      "features": [
+        "chapter_title",
+        "heading",
+        "paragraph",
+        "code"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "linguaggio-c-page-010",
+      "source": "samples/linguaggio-c-kernighan-ritchie.pdf",
+      "page_number_pdf": 10,
+      "features": [
+        "paragraph",
+        "code",
+        "definition_list"
+      ],
+      "status": "reviewed"
+    },
+    {
+      "id": "linguaggio-c-page-050",
+      "source": "samples/linguaggio-c-kernighan-ritchie.pdf",
+      "page_number_pdf": 50,
+      "features": [
+        "heading",
+        "paragraph",
+        "code",
+        "exercise"
+      ],
+      "status": "reviewed"
+    }
+  ]
+}

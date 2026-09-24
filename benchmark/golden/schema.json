@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pdf-to-book.local/golden-page.schema.json",
+  "title": "PDF parsing golden page",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "source",
+    "page_number_pdf",
+    "language",
+    "blocks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "page_number_pdf": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "printed_page": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "language": {
+      "type": "string"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "enum": [
+            "manual_visual_review",
+            "automatic_adapter"
+          ]
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "reviewed",
+            "adjudicated"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "reading_order",
+          "include_in_epub"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "chapter_label",
+              "heading",
+              "paragraph",
+              "epigraph",
+              "attribution",
+              "list_item",
+              "code",
+              "figure",
+              "caption",
+              "table",
+              "footnote",
+              "exercise",
+              "running_header",
+              "running_footer",
+              "page_number"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "reading_order": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "include_in_epub": {
+            "type": "boolean"
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "language": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "caption_block_id": {
+            "type": "string"
+          },
+          "group_id": {
+            "type": "string"
+          },
+          "bbox_normalized": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            ],
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "image_uri": {
+            "type": "string"
+          },
+          "image_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

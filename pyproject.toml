@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-to-book"
+version = "0.1.0"
+description = "Local PDF to EPUB conversion with native Docling structure and source geometry"
+readme = "README.md"
+authors = [{name = "Domenico Bulfamante"}]
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+dependencies = [
+  "pypdfium2==5.13.0",
+  "markdown-it-py==4.2.0",
+  "jsonschema==4.26.0",
+  "latex2mathml==3.81.1",
+  "Pillow==12.3.0",
+]
+
+[project.optional-dependencies]
+convert = ["docling==2.128.0"]
+
+[project.scripts]
+pdf-to-book = "pdf_to_book.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["pdf_to_book*"]
