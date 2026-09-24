@@ -23,7 +23,7 @@ jobs:
   public-golden-live:
     runs-on: ubuntu-latest
     env:
-      HF_HOME: ${{ runner.temp }}/huggingface
+      HF_HOME: ${{ github.workspace }}/benchmark/cache/huggingface
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,7 +32,7 @@ jobs:
           cache: pip
       - uses: actions/cache@v4
         with:
-          path: ${{ runner.temp }}/huggingface
+          path: ${{ github.workspace }}/benchmark/cache/huggingface
           key: docling-models-${{ runner.os }}-2.128.0-v1
       - name: Install converter
         run: python -m pip install -e '.[convert]'
