@@ -38,3 +38,9 @@ jobs:
         run: python -m pip install -e '.[convert]'
       - name: Extract PDFs and check public golden corpus
         run: python benchmark/public_golden/run.py --live
+      - name: Keep downloaded models for diagnosing a failed gate
+        if: failure()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ github.workspace }}/benchmark/cache/huggingface
+          key: docling-models-${{ runner.os }}-2.128.0-v1

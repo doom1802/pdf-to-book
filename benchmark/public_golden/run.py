@@ -160,6 +160,32 @@ def check(book: dict, xhtml: str, work: Path, spec: dict) -> bool:
     raise ValueError(f"Unknown golden check: {kind}")
 
 
+def observed_summary(book: dict, spec: dict) -> str:
+    """Show bounded evidence when a live model disagrees with a reviewed probe."""
+    page = spec.get("page")
+    kind = spec["kind"]
+    if kind == "count":
+        matches = selected(book["blocks"], page=page, kind=spec["type"])
+        return f"observed count: {len(matches)}"
+    if kind == "order":
+        positions = []
+        for text in spec["texts"]:
+            matches = [f"{index}:{block['type']}"
+                       for index, block in enumerate(book["blocks"])
+                       if (page is None or page_of(block) == page)
+                       and normalized(text) in normalized(block.get("text", ""))]
+            positions.append(f"{text!r} -> {', '.join(matches) or 'missing'}")
+        return "; ".join(positions)
+    if kind == "block":
+        same_page = selected(book["blocks"], page=page)
+        requested = [block for block in same_page if block["type"] == spec["type"]]
+        candidates = requested or same_page
+        return "observed blocks: " + "; ".join(
+            f"{block['type']} {block.get('text', '')[:100]!r}" for block in candidates[:12]
+        )
+    return ""
+
+
 def _inside(relative_path: str) -> Path:
     path = (ROOT / relative_path).resolve()
     if not path.is_relative_to(ROOT):
@@ -222,10 +248,11 @@ def run_case(case: dict, *, live: bool = False) -> list[str]:
         book = adapt(native, source, case["id"], "Public golden corpus", "en", work / "assets")
         book["source_sha256"] = case["source_sha256"]
         xhtml = render_content(book)
-        failures = [
-            f"{case['id']}: {spec}"
-            for spec in annotation["checks"] if not check(book, xhtml, work, spec)
-        ]
+        failures = []
+        for spec in annotation["checks"]:
+            if not check(book, xhtml, work, spec):
+                detail = f"; {observed_summary(book, spec)}" if live else ""
+                failures.append(f"{case['id']}: {spec}{detail}")
         if not live and semantic_fingerprint(book) != case["semantic_sha256"]:
             failures.append(f"{case['id']}: complete semantic snapshot changed; review the PDF and update the baseline")
         epub = work / "book.epub"
