@@ -14,7 +14,9 @@ so a changed source must be reviewed again. The fast gate also pins a digest
 of **every** semantic block, note and table cell from each snapshot. That
 digest detects unreviewed changes outside the 53 hand-written probes; it is a
 change detector, not a correctness score. Raster bytes are excluded so the
-semantic baseline can run on macOS and Linux.
+semantic baseline can run on macOS and Linux. Fresh Docling runs use focused
+content checks because model inference can merge adjacent paragraphs
+differently across platforms.
 
 | Case and PDF pages | What is gated | Known gaps |
 | --- | --- | --- |
