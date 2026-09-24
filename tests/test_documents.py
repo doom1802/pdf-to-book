@@ -127,7 +127,7 @@ class DeepSeekDocumentTest(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_pdf_contents_entries_are_rendered_in_reading_order(self):
-        """Known gap: document_index cells are parsed but lost by the adapter."""
+        """Known gap: printed contents survive as an image, not searchable entries."""
         self.assertEqual(self.native['tables'][0]['data']['table_cells'][0]['text'], '1 Introduction')
         self.assertIn('1 Introduction', render_content(self.book))
 

@@ -19,3 +19,22 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Test benchmark helpers
         run: python -m unittest discover -s benchmark/golden -p 'test_*.py' -v
+
+  public-golden-live:
+    runs-on: ubuntu-latest
+    env:
+      HF_HOME: ${{ runner.temp }}/huggingface
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/huggingface
+          key: docling-models-${{ runner.os }}-2.128.0-v1
+      - name: Install converter
+        run: python -m pip install -e '.[convert]'
+      - name: Extract PDFs and check public golden corpus
+        run: python benchmark/public_golden/run.py --live

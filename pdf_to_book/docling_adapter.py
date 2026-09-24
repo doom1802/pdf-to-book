@@ -350,6 +350,12 @@ def adapt(json_path, source, title, author, language, assets_dir):
                     assets.append({'path':block['asset'],'media_type':image['mimetype'],'sha256':digest})
             elif kind == 'table':
                 block['data'] = item['data']
+            elif kind == 'document_index':
+                # Docling's index grid may merge unrelated entries into cells.
+                # Preserve the source page region instead of silently dropping it.
+                block.update(source_crop(prov[0]))
+                block['text_method'] = 'source_image'
+                block['alt'] = f"Printed table of contents, PDF page {prov[0]['page_no']}"
             elif kind == 'list_item':
                 block.update(group_id=item.get('parent',{}).get('$ref'),
                              ordered=item.get('enumerated',False),marker=item.get('marker',''))

@@ -1,12 +1,12 @@
 # Pubblicare su GitHub
 
-La repository Git locale è già inizializzata sul branch `main`. Crea su GitHub, nel tuo account personale, una repository **pubblica** chiamata `pdf-to-book` (o con il nome che preferisci). Lasciala vuota: README, licenza e `.gitignore` sono già nel commit locale. [GitHub consiglia di non preselezionare questi file quando si importa una repository esistente](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+La repository pubblica è già disponibile su [GitHub](https://github.com/doom1802/pdf-to-book) e il remote `origin` punta a questo indirizzo. README, licenza e `.gitignore` sono versionati.
 
-Nella cartella del progetto, collega la repo e invia il branch:
+Per inviare nuove modifiche dal branch `main`:
 
 ```bash
-git remote add origin https://github.com/TUO_USERNAME/pdf-to-book.git
-git push -u origin main
+git status --short
+git push origin main
 ```
 
-Se hai scelto un altro nome, sostituisci anche `pdf-to-book` nell'URL. Dopo il push, verifica che i file pubblici siano soltanto quelli mostrati da `git ls-files` e che la workflow **CI** sia verde. I file locali ignorati non vengono inviati da Git.
+Dopo il push, verifica che i file pubblici siano soltanto quelli mostrati da `git ls-files` e che la workflow **CI** sia verde. Il corpus golden pubblico ha licenze e attribuzione proprie; gli altri PDF locali ignorati non vengono inviati da Git.

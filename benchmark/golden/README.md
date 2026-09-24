@@ -1,7 +1,7 @@
 # Golden set per il parsing PDF
 
 Il golden set descrive manualmente ciò che un parser dovrebbe ricostruire da ogni pagina. Le annotazioni derivano dalla pagina renderizzata, non dall'output di MinerU, Docling o PaddleOCR.
-Il codice del valutatore e lo schema sono pubblici; le annotazioni e le predizioni locali, derivate da documenti di terzi, non sono distribuite. I test unitari del valutatore usano casi sintetici.
+Il codice del valutatore e lo schema sono pubblici; le annotazioni e le predizioni locali di questo benchmark, derivate da documenti senza diritti di redistribuzione verificati, non sono distribuite. I test unitari del valutatore usano casi sintetici. Un [corpus pubblico separato](../public_golden/README.md) include PDF con licenze verificate, annotazioni focalizzate e controlli sull'EPUB.
 
 ## Obiettivo
 

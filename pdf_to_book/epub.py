@@ -249,6 +249,14 @@ def _render_blocks(book, blocks, footnotes, *, locations=None, current_filename=
                 f'{captions}</figure>'
             )
         elif kind == 'table': rendered.append(table_html(block))
+        elif kind == 'document_index':
+            rendered.append(
+                f'<figure class="source-index" id="{identifier}">'
+                f'<img src="{E(block["asset"])}" alt="{escaped(block["alt"])}" '
+                f'width="{int(block["image_width_px"])}" height="{int(block["image_height_px"])}" '
+                f'style="width: {int(block["display_width_px"])}px; max-width: 100%"/>'
+                '</figure>'
+            )
         elif kind == 'list_item':
             if not active_list:
                 tag = 'ol' if block.get('ordered') else 'ul'

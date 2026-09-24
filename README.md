@@ -8,7 +8,7 @@ PDF → Docling JSON → documento intermedio book.json → EPUB 3
 
 Il risultato include una copertina ricavata dalla prima pagina, immagini dimensionate in proporzione alla pagina originale, indice navigabile, gerarchia dei titoli, codice ricostruito dalle coordinate del PDF e note con collegamenti di ritorno. Nei libri completi, i segnalibri di primo livello del PDF diventano documenti EPUB separati. I colori del testo e della pagina restano sotto il controllo del tema del lettore.
 
-**Stato:** prototipo verificato su campioni locali; la qualità della conversione dipende dalla struttura del PDF. La repository distribuisce solo il codice e la documentazione: PDF di terzi, estratti, annotazioni derivate e EPUB generati restano locali. Converti soltanto documenti per i quali hai i diritti necessari.
+**Stato:** prototipo verificato su campioni locali e su un [corpus pubblico con licenze di redistribuzione](benchmark/public_golden/README.md). La qualità della conversione dipende dalla struttura del PDF. I PDF personali, gli estratti non autorizzati e gli EPUB generati restano locali. Converti soltanto documenti per i quali hai i diritti necessari.
 
 ## Avvio
 
@@ -71,10 +71,13 @@ L'anteprima nel browser verifica il reflow; il comportamento nei singoli lettori
 python -m pip install -e .
 python -m unittest discover -s tests -v
 python -m unittest discover -s benchmark/golden -p 'test_*.py' -v
+python benchmark/public_golden/run.py
 ```
 
-I test unitari usano dati sintetici e girano in CI. I test che richiedono PDF,
-export e annotazioni locali vengono saltati quando quei file non sono presenti.
+I test rapidi usano anche PDF pubblici con licenza CC BY, una fixture originale e
+snapshot Docling versionati. La CI esegue inoltre `python
+benchmark/public_golden/run.py --live` per rifare l'estrazione sui medesimi PDF.
+I test sui documenti personali vengono saltati quando quei file non sono presenti.
 Il rapporto della validazione campione è in [`docs/VALIDATION.md`](docs/VALIDATION.md).
 
 Il validatore locale controlla ZIP, metadati, manifest, spine, XML, risorse, identificatori e destinazioni dei collegamenti. Per il controllo di conformità completo, scaricare [EPUBCheck ufficiale](https://github.com/w3c/epubcheck/releases) e aggiungere alla conversione:
@@ -89,7 +92,15 @@ Prima delle ottimizzazioni, eseguire anche la quality gate esatta e il benchmark
 
 ## Benchmark e revisore
 
-Il golden set locale comprende nove pagine annotate, tre per libro. Le annotazioni e gli output dei parser non vengono distribuiti. Se possiedi i documenti e gli output necessari, puoi rigenerare le predizioni e i risultati:
+Il [golden set pubblico](benchmark/public_golden/README.md) controlla otto pagine
+selezionate da tre PDF e verifica l'EPUB finale. Le annotazioni sono state
+trascritte da pagine renderizzate; i JSON Docling sono input riproducibili, non
+la verità di riferimento. La matrice di copertura e i difetti ancora aperti
+sono documentati nel corpus. Un campione finito non può garantire ogni PDF.
+
+Il golden set locale precedente comprende nove pagine annotate, tre per libro.
+Le sue annotazioni e gli output dei parser non vengono distribuiti. Se possiedi
+i documenti e gli output necessari, puoi rigenerare le predizioni e i risultati:
 
 ```bash
 python benchmark/golden/run_benchmark.py
@@ -105,8 +116,8 @@ Aprire <http://127.0.0.1:8765>. I blocchi mantengono identificatori stabili dura
 
 ## Limiti del prototipo
 
-La gerarchia dei titoli e alcune note vengono ricostruite anche dalla geometria: sono euristiche, validate sul capitolo campione, non una garanzia per ogni libro. Le continuazioni di codice tra pagine vengono segnalate per revisione, senza inventare rientri. Corsivo, grassetto e codice inline non sono ancora ricostruiti integralmente dal PDF; le tabelle mantengono celle e span, ma non sono presenti nel capitolo usato per la prova completa.
+La gerarchia dei titoli e alcune note vengono ricostruite anche dalla geometria: sono euristiche, validate sul capitolo campione, non una garanzia per ogni libro. Le continuazioni di codice tra pagine vengono segnalate per revisione, senza inventare rientri. Corsivo, grassetto e codice inline non sono ancora ricostruiti integralmente dal PDF. Il corpus pubblico include tabelle complesse e documenta le associazioni di celle che Docling ancora interpreta male. Le pagine di indice stampato con celle incoerenti vengono preservate come immagini leggibili.
 
 Architettura e formato intermedio sono descritti in [`docs/architecture.md`](docs/architecture.md).
 Per contribuire, leggi [`CONTRIBUTING.md`](CONTRIBUTING.md); le priorità di pulizia sono in [`docs/OPEN_SOURCE_ROADMAP.md`](docs/OPEN_SOURCE_ROADMAP.md).
-Il codice è distribuito con licenza [MIT](LICENSE). Per creare e collegare la repository GitHub, vedi [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
+Il codice è distribuito con licenza [MIT](LICENSE); le licenze delle fixture sono indicate in [`benchmark/public_golden/ATTRIBUTION.md`](benchmark/public_golden/ATTRIBUTION.md).

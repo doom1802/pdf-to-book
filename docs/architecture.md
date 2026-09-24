@@ -21,6 +21,8 @@ I paragrafi incompleti vengono uniti solo tra pagine consecutive e senza un bloc
 
 `epub` produce XHTML con escape XML, indice gerarchico, liste, immagini, tabelle, note e CSS per il reflow. La larghezza di ogni figura viene calcolata rispetto alla pagina PDF sorgente e applicata in percentuale nel contenuto reflowable; larghezza e altezza intrinseche mantengono il rapporto d'aspetto. Il contenitore include soltanto risorse locali dichiarate nel manifest. Gli hash delle immagini vengono ricontrollati prima del confezionamento.
 
+Quando Docling classifica l'indice stampato come `document_index` ma ne fonde le voci in celle non affidabili, l'adattatore conserva la regione originale come immagine leggibile. L'indice EPUB navigabile rimane separato e viene costruito dai titoli; l'immagine mantiene visibile la pagina stampata senza attribuirle link o testo che il parser non ha ricostruito con certezza.
+
 `validate` verifica la struttura e tutti i collegamenti interni. EPUBCheck è una seconda verifica indipendente, opzionale nella CLI. La validità del contenitore non equivale alla correttezza semantica del parsing.
 
 ## Formato intermedio `book-0.1`

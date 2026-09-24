@@ -1,0 +1,52 @@
+{
+  "schema_version": "public-golden-1",
+  "docling_version": "2.128.0",
+  "cases": [
+    {
+      "id": "layout-stress",
+      "pdf": "pdfs/layout-stress.pdf",
+      "source_sha256": "53e3f6fba56d56f1555812357400d850ccf191b3b59f8ca5d7ccb614cfbc1ee1",
+      "semantic_sha256": "5cc9bfe922145964b6c2a8a02f4fe920e9c2f0927f0e4d573f4f2d6abcf9f2b8",
+      "pages": [1],
+      "native": "native/layout-stress.json.gz",
+      "annotation": "annotations/layout-stress.json",
+      "cli_smoke": true
+    },
+    {
+      "id": "ods-toc",
+      "pdf": "pdfs/ods-python.pdf",
+      "source_sha256": "2bdd7e8129fff83daf04cd594fce5236d72b1d8b8c72832fde22ea762a7e014f",
+      "semantic_sha256": "efbda0126cb070de1df2d5a08b6d837c81715d4b3113e0586ee4b79c264cea30",
+      "pages": [4],
+      "native": "native/ods-toc.json.gz",
+      "annotation": "annotations/ods-toc.json"
+    },
+    {
+      "id": "ods-tables-footnote",
+      "pdf": "pdfs/ods-python.pdf",
+      "source_sha256": "2bdd7e8129fff83daf04cd594fce5236d72b1d8b8c72832fde22ea762a7e014f",
+      "semantic_sha256": "fa9adae5f4e2dae2af4275846db1d16e1694b182afbc7ab788ab7954d28dd7c3",
+      "pages": [35, 36],
+      "native": "native/ods-tables-footnote.json.gz",
+      "annotation": "annotations/ods-tables-footnote.json"
+    },
+    {
+      "id": "ods-figure-code",
+      "pdf": "pdfs/ods-python.pdf",
+      "source_sha256": "2bdd7e8129fff83daf04cd594fce5236d72b1d8b8c72832fde22ea762a7e014f",
+      "semantic_sha256": "c14f1faa136690eaaf84efbbb145b1a5dbe104aa9ac229e5a0c1c9700b81a6c7",
+      "pages": [101, 102],
+      "native": "native/ods-figure-code.json.gz",
+      "annotation": "annotations/ods-figure-code.json"
+    },
+    {
+      "id": "joss-figure-list",
+      "pdf": "pdfs/joss-05886.pdf",
+      "source_sha256": "cfbda7cfd5f6e4121db327ca37413dae23fec8e09a5ee25840d3c6a475e3838b",
+      "semantic_sha256": "71c948b867ac05b5bbe20ef9cecf4d9748b0d48c2b66ec9518a3e2ae8aab7b04",
+      "pages": [1, 2],
+      "native": "native/joss-figure-list.json.gz",
+      "annotation": "annotations/joss-figure-list.json"
+    }
+  ]
+}

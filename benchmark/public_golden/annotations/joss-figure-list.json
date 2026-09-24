@@ -1,0 +1,21 @@
+{
+  "id": "joss-figure-list",
+  "annotation": {"method": "manual_visual_review", "status": "reviewed"},
+  "features": ["title", "sidebar", "narrow_body_column", "numbered_list", "scientific_diagram", "caption", "page_continuation", "repeated_logo", "footer_suppression"],
+  "checks": [
+    {"kind": "block", "page": 1, "type": "heading", "text": "CLEAVING: a LAMMPS package to compute surface free energies"},
+    {"kind": "block", "page": 1, "type": "heading", "text": "Summary"},
+    {"kind": "block", "page": 1, "type": "heading", "text": "Statement of need"},
+    {"kind": "count", "page": 2, "type": "list_item", "minimum": 4},
+    {"kind": "block", "page": 2, "type": "list_item", "contains": "introduce an external"},
+    {"kind": "block", "page": 2, "type": "list_item", "contains": "remove the cleaving potentials"},
+    {"kind": "figure_with_caption", "page": 2, "caption": "Figure 1: The thermodynamic path", "min_width": 200},
+    {"kind": "order", "page": 2, "texts": ["introduce an external", "remove the cleaving potentials", "Figure 1: The thermodynamic path"]},
+    {"kind": "epub_excludes", "text": "Di Pasquale et al. (2024). CLEAVING"},
+    {"kind": "count", "type": "*", "minimum": 40}
+  ],
+  "known_gaps": [
+    {"feature": "decorative_artifacts", "expected": "Journal logos and tiny link icons are not read as content figures.", "observed": "Docling emits several decorative marks as figures; the meaningful Figure 1 is preserved."},
+    {"feature": "author_line", "expected": "The complete author list is one paragraph.", "observed": "Docling splits the last author's surname into a second paragraph."}
+  ]
+}

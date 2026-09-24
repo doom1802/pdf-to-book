@@ -1,0 +1,19 @@
+{
+  "id": "ods-figure-code",
+  "annotation": {"method": "manual_visual_review", "status": "reviewed"},
+  "features": ["vector_diagram", "figure_caption", "section_hierarchy", "pseudocode", "code_continuation", "page_furniture"],
+  "checks": [
+    {"kind": "count", "page": 101, "type": "figure", "minimum": 1},
+    {"kind": "block", "page": 101, "type": "caption", "text": "Figure 4.5: The lengths of the edges in a skiplist."},
+    {"kind": "block", "page": 101, "type": "heading", "text": "4.3 SkiplistList: An Efficient Random-Access List"},
+    {"kind": "count", "type": "code", "minimum": 3},
+    {"kind": "code_preserved", "minimum": 3, "min_width": 280},
+    {"kind": "order", "page": 101, "texts": ["Figure 4.5: The lengths", "4.3 SkiplistList", "A SkiplistList implements"]},
+    {"kind": "epub_excludes", "text": "§4.3"},
+    {"kind": "count", "type": "*", "minimum": 13}
+  ],
+  "known_gaps": [
+    {"feature": "accessible_code", "expected": "Pseudocode is both visually faithful and machine-readable.", "observed": "The PDF uses mathematical glyphs that are not faithfully extracted; EPUB uses source crops for three code blocks."},
+    {"feature": "caption_link", "expected": "Figure 4.5 and its caption are one semantic figure.", "observed": "Docling emits the caption separately from the image."}
+  ]
+}

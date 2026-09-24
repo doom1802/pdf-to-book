@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Manually reviewed public golden probes",
+  "type": "object",
+  "required": ["id", "annotation", "features", "checks", "known_gaps"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "annotation": {
+      "type": "object",
+      "required": ["method", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "method": {"const": "manual_visual_review"},
+        "status": {"const": "reviewed"}
+      }
+    },
+    "features": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "checks": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {"enum": ["block", "count", "table_cell", "figure_with_caption", "footnote", "order", "epub_contains", "epub_excludes", "index_image", "code_preserved"]},
+          "page": {"type": "integer", "minimum": 1},
+          "type": {"type": "string"},
+          "text": {"type": "string"},
+          "contains": {"type": "string"},
+          "caption": {"type": "string"},
+          "level": {"type": "integer", "minimum": 1, "maximum": 6},
+          "col_span": {"type": "integer", "minimum": 1},
+          "minimum": {"type": "integer", "minimum": 1},
+          "min_width": {"type": "integer", "minimum": 1},
+          "min_height": {"type": "integer", "minimum": 1},
+          "texts": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["feature", "expected", "observed"],
+        "additionalProperties": false,
+        "properties": {
+          "feature": {"type": "string", "minLength": 1},
+          "expected": {"type": "string", "minLength": 1},
+          "observed": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

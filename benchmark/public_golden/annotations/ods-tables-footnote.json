@@ -1,0 +1,23 @@
+{
+  "id": "ods-tables-footnote",
+  "annotation": {"method": "manual_visual_review", "status": "reviewed"},
+  "features": ["math_inline", "hyphenation", "section_hierarchy", "footnote", "multi_table", "merged_table_header", "caption", "table_notes", "page_furniture"],
+  "checks": [
+    {"kind": "block", "page": 35, "type": "heading", "text": "1.7 List of Data Structures"},
+    {"kind": "block", "page": 35, "type": "heading", "text": "1.8 Discussion and Exercises"},
+    {"kind": "block", "page": 35, "type": "paragraph", "contains": "Tables 1.1 and 1.2 summarize"},
+    {"kind": "count", "page": 36, "type": "table", "minimum": 2},
+    {"kind": "table_cell", "page": 36, "text": "List implementations", "col_span": 4},
+    {"kind": "table_cell", "page": 36, "text": "USet implementations", "col_span": 4},
+    {"kind": "table_cell", "page": 36, "text": "ArrayStack"},
+    {"kind": "table_cell", "page": 36, "text": "ChainedHashTable"},
+    {"kind": "block", "page": 36, "type": "caption", "text": "Table 1.1: Summary of List and USet implementations."},
+    {"kind": "footnote", "page": 35, "contains": "http://opendatastructures.org"},
+    {"kind": "epub_excludes", "text": "§1.8"},
+    {"kind": "count", "type": "*", "minimum": 10}
+  ],
+  "known_gaps": [
+    {"feature": "math_inline", "expected": "Inline fractions, inequalities and superscripts remain exact.", "observed": "Several math glyphs become plain-text approximations in Docling output."},
+    {"feature": "table_notes", "expected": "The A and E table notes keep their markers and associations.", "observed": "The notes are present but their markers are not linked to table cells."}
+  ]
+}

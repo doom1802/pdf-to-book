@@ -17,6 +17,7 @@ output/
 samples/
 tests/fixtures/
 *.pdf
+!benchmark/public_golden/pdfs/*.pdf
 *.epub
 :memory:.ses
 *.egg-info/

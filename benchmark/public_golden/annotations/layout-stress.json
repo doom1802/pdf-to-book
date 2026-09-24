@@ -1,0 +1,31 @@
+{
+  "id": "layout-stress",
+  "annotation": {"method": "manual_visual_review", "status": "reviewed"},
+  "features": ["two_columns", "reading_order", "headings", "numbered_list", "indented_code", "xml_escaping", "merged_table_header", "figure_caption", "footnote", "page_furniture"],
+  "checks": [
+    {"kind": "block", "page": 1, "type": "heading", "text": "Reading order under stress", "level": 1},
+    {"kind": "block", "page": 1, "type": "heading", "text": "1. Input sequence", "level": 2},
+    {"kind": "block", "page": 1, "type": "heading", "text": "2. Output sequence", "level": 2},
+    {"kind": "block", "page": 1, "type": "paragraph", "contains": "The copper marker starts the left column"},
+    {"kind": "block", "page": 1, "type": "list_item", "text": "Capture the source characters."},
+    {"kind": "block", "page": 1, "type": "list_item", "text": "Preserve the code indentation."},
+    {"kind": "block", "page": 1, "type": "list_item", "text": "Keep the footnote reference [1]."},
+    {"kind": "block", "page": 1, "type": "code", "text": "def escape(value):\n    if value < 0:\n        return \"<none>\"\n    return f\"{value}&ok\""},
+    {"kind": "block", "page": 1, "type": "paragraph", "text": "Literal tags <book> and ampersands & remain text."},
+    {"kind": "table_cell", "page": 1, "text": "Merged measurement header", "col_span": 3},
+    {"kind": "table_cell", "page": 1, "text": "alpha"},
+    {"kind": "table_cell", "page": 1, "text": "beta"},
+    {"kind": "figure_with_caption", "page": 1, "caption": "Figure 1. Two stages in reading order", "min_width": 100},
+    {"kind": "footnote", "page": 1, "contains": "This note belongs to the list"},
+    {"kind": "order", "page": 1, "texts": ["The copper marker starts", "The goldfinch marker ends", "The violet marker starts", "The indigo marker ends"]},
+    {"kind": "epub_contains", "text": "Literal tags &lt;book&gt; and ampersands &amp; remain text."},
+    {"kind": "epub_excludes", "text": "REGRESSION ATLAS"},
+    {"kind": "epub_excludes", "text": "PUBLIC GOLDEN FIXTURE"},
+    {"kind": "count", "type": "*", "minimum": 17}
+  ],
+  "known_gaps": [
+    {"feature": "two_columns", "expected": "The entire left column precedes heading 2. Output sequence.", "observed": "Docling places both column headings before the left-column body."},
+    {"feature": "table_structure", "expected": "alpha, 2, 4 and beta, 5, 25 remain in three distinct columns.", "observed": "Docling finds all values but assigns the first column to the third position on data rows."},
+    {"feature": "footnote_link", "expected": "The reference [1] links to its note and back.", "observed": "Docling labels the note but does not identify its marker for linking."}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "ods-toc",
+  "annotation": {"method": "manual_visual_review", "status": "reviewed"},
+  "features": ["printed_contents", "nested_sections", "leader_dots", "page_numbers", "source_image_fallback"],
+  "checks": [
+    {"kind": "block", "page": 4, "type": "heading", "text": "Contents"},
+    {"kind": "index_image", "page": 4, "min_width": 1000, "min_height": 1500},
+    {"kind": "epub_contains", "text": "Printed table of contents, PDF page 4"},
+    {"kind": "count", "type": "*", "minimum": 2}
+  ],
+  "known_gaps": [
+    {"feature": "searchable_contents", "expected": "Printed entries such as 4.3 SkiplistList are searchable text and links.", "observed": "Docling merges unrelated entries; the EPUB preserves the printed page as an image while its separate navigation uses detected headings."}
+  ]
+}
